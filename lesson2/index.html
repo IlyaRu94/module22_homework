@@ -1,0 +1,49 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG в кнопке</title>
+</head>
+<body>
+    <button id="me">Нажми на меня
+        <svg fill="currentColor" class="noactive block" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-5.904-2.854a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z"/>
+        </svg>
+        <svg fill="currentColor" class="active" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z"/>
+        </svg>
+    </button>
+    <script>
+        const btn = document.querySelector('#me');
+        const noactive = document.querySelector('.noactive');
+        const active = document.querySelector('.active');
+        btn.addEventListener('click', () => {
+            noactive.classList.toggle('block');
+            active.classList.toggle('block');
+            btn.classList.toggle('yellow');
+        });
+    </script>
+    <style>
+        #me{
+            font-size: 5em;
+            padding: 50px;
+            border-radius: 10px;
+        }
+        .yellow{
+            background: yellow;
+        }
+        .noactive, .active{
+            width: 50px;
+            height: 50px;
+            display:none;
+        }
+        .block{
+            display:inline-block;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    </style>
+</body>
+</html>

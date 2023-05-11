@@ -1,0 +1,55 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.section {
+    height: 500px;
+    width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #eeeeff;
+    text-align: center;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.send,.btn, #msg{
+    height: 30px;
+}
+#msg{
+    width: 400px;
+}
+#output
+{
+    overflow: auto;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.sent{
+    overflow-wrap: break-word;
+    background: #cfd4fb;
+    color: black;
+    padding: 20px;
+    border-radius: 10px 0 10px 10px;
+    text-align: right;
+    margin: 5px;
+    align-self: end;
+}
+.resp{
+    overflow-wrap: break-word;
+    background: #e4cffb;
+    color: black;
+    padding: 20px;
+    text-align: left;
+    border-radius: 0 10px 10px 10px;
+    align-self: start;
+    margin:5px;
+}
+.item{
+    display:block;
+    padding: 10px;
+}

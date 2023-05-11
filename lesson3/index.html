@@ -1,0 +1,37 @@
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Геолокация и размер экрана</title>
+    </head>
+    <body>
+        <h1>Местоположение и размер экрана</h1>
+        <button class="btn">Показать геолокацию и размер экрана</button>
+        <p id = "status"></p>
+        <p id = "screen"></p>
+        <script>
+            const status = document.querySelector('#status');
+            const btn = document.querySelector('.btn');
+            const screen = document.querySelector('#screen');
+            // Функция, выводящая текст об ошибке
+            const error = () => {
+                status.textContent = 'Информация о местоположении недоступна';
+            }
+            // Функция, срабатывающая при успешном получении геолокации
+            const success = (position) => {
+                //console.log('position', position);
+                const latitude  = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                status.textContent = `Широта: ${latitude} °, Долгота: ${longitude} °`;
+            }
+            btn.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    status.textContent = 'Информация о местоположении недоступна';
+                } else {
+                    status.textContent = 'Определение местоположения…';
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
+                screen.textContent = `Размеры Вашего экрана: ${window.screen.width}x${window.screen.height}`;
+            });
+        </script>
+    </body>
+</html>

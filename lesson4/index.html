@@ -1,0 +1,43 @@
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Время по геолокации</title>
+    </head>
+    <body>
+        <h1>Сервис определения времени и часовой зоны по геолокации</h1>
+        <button class="btn">Показать информацию</button>
+        <p id = "timezone"></p>
+        <p id = "date_time_txt"></p>
+        <script>
+            const timezone = document.querySelector('#timezone');
+            const btn = document.querySelector('.btn');
+            const datetime = document.querySelector('#date_time_txt');
+            // Функция, выводящая текст об ошибке
+            const error = () => {
+                timezone.textContent = 'Не могу определить время, так как информация о местоположении недоступна';
+            }
+            // Функция, срабатывающая при успешном получении геолокации
+            const success = (position) => {
+                const latitude  = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                //Если все успешно - запрашиваем дату, время и временную зону
+                fetch(`https://api.ipgeolocation.io/timezone?apiKey=32bcd4a6e4b548968e7afcdb682ac679&lat=${latitude}&long=${longitude}`)
+                .then((response) => { return response.json(); })
+                .then((data) => {
+                    timezone.textContent = `Ваша временная зона: ${data.timezone}`;
+                    datetime.textContent = `Местные дата и время: ${data.date_time_txt}`;
+                })
+                // если запрос даты и времени не увенчался успехом - выведем ошибку
+                .catch(() => { timezone.textContent = 'Сервер определения времени недоступен'; });
+            }
+            btn.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    timezone.textContent = 'Не могу определить время, так как браузер не поддерживает определение местоположения';
+                } else {
+                    timezone.textContent = 'Определение местоположения…';
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
+            });
+        </script>
+    </body>
+</html>
